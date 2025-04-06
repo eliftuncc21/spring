@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.dto.student;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.*;
