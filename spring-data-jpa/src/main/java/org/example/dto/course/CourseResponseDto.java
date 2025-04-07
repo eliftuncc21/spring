@@ -3,12 +3,11 @@ package org.example.dto.course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.dto.student.DtoStudent;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DtoCourse {
+public class CourseResponseDto {
     private Integer id;
     private String name;
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_NULL) //Null olanları gösterme
-public class DtoCustomer {
+public class CustomerResponseDto {
     private String name;
     private Integer addressId;
 }

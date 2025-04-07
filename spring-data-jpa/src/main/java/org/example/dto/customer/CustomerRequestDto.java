@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DtoCustomerIU {
+public class CustomerRequestDto {
     @NotEmpty(message = "Name alanı boş bırakılamaz")
     @Size(min = 3, max = 10, message = "Name alanı 3 ile 10 karakter arasında olmalı")
     private String name;

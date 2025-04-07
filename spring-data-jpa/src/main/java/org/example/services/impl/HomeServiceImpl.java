@@ -1,43 +1,43 @@
 package org.example.services.impl;
 
-import org.example.dto.home.DtoHome;
-import org.example.dto.room.DtoRoom;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.home.HomeResponseDto;
+import org.example.dto.room.RoomResponseDto;
 import org.example.entities.Home;
 import org.example.entities.Room;
 import org.example.repository.HomeRepository;
 import org.example.services.IHomeServices;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class HomeServiceImpl implements IHomeServices {
 
-    @Autowired
-    private HomeRepository homeRepository;
+    private final HomeRepository homeRepository;
 
     @Override
-    public DtoHome getHomeById(Integer id) {
+    public HomeResponseDto getHomeById(Integer id) {
         Optional<Home> optional = homeRepository.findById(id);
         if(optional.isEmpty()){
             return null;
         }
         Home home = optional.get();
-        DtoHome dtoHome = new DtoHome();
-        BeanUtils.copyProperties(home,dtoHome);
+        HomeResponseDto homeResponseDto = new HomeResponseDto();
+        BeanUtils.copyProperties(home, homeResponseDto);
 
         List<Room> dbRooms = optional.get().getRoom();
 
         if (dbRooms != null && !dbRooms.isEmpty()) {
             for(Room room : dbRooms){
-                DtoRoom dtoRoom = new DtoRoom();
-                BeanUtils.copyProperties(room,dtoRoom);
-                dtoHome.getRooms().add(dtoRoom);
+                RoomResponseDto roomResponseDto = new RoomResponseDto();
+                BeanUtils.copyProperties(room, roomResponseDto);
+                homeResponseDto.getRooms().add(roomResponseDto);
             }
         }
-        return dtoHome;
+        return homeResponseDto;
     }
 }

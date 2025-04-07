@@ -1,14 +1,13 @@
 package org.example.services.impl;
 
-import org.example.dto.customer.DtoCustomer;
-import org.example.dto.customer.DtoCustomerIU;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.customer.CustomerRequestDto;
+import org.example.dto.customer.CustomerResponseDto;
 import org.example.entities.Customer;
 import org.example.entities.Address;
 import org.example.repository.CustomerRepository;
 import org.example.repository.AddressRepository;
 import org.example.services.ICustomerServices;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,53 +15,52 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerServicesImpl implements ICustomerServices {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
-    @Autowired
-    private AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
     @Override
-    public DtoCustomer saveCustomer(DtoCustomerIU dtoCustomerIU) {
+    public CustomerResponseDto saveCustomer(CustomerRequestDto customerRequestDto) {
 
-        Address address = addressRepository.findById(dtoCustomerIU.getAddressId())
+        Address address = addressRepository.findById(customerRequestDto.getAddressId())
                 .orElse(null);
 
         Customer customer = new Customer();
-        customer.setName(dtoCustomerIU.getName());
+        customer.setName(customerRequestDto.getName());
         customer.setAddress(address);
 
         Customer savedCustomer = customerRepository.save(customer);
 
-        DtoCustomer dtoCustomer = new DtoCustomer();
-        dtoCustomer.setName(savedCustomer.getName());
-        dtoCustomer.setAddressId(savedCustomer.getAddress().getAddressId());
-        return dtoCustomer;
+        CustomerResponseDto customerResponseDto = new CustomerResponseDto();
+        customerResponseDto.setName(savedCustomer.getName());
+        customerResponseDto.setAddressId(savedCustomer.getAddress().getAddressId());
+        return customerResponseDto;
     }
 
-    public List<DtoCustomer> getCustomers() {
+    public List<CustomerResponseDto> getCustomers() {
         List<Customer> customerList = customerRepository.findAll();
-        List<DtoCustomer> dtoCustomerList = new ArrayList<>();
-        for (Customer customer : customerList){
-            DtoCustomer dtoCustomer = new DtoCustomer();
-            dtoCustomer.setName(customer.getName());
-            dtoCustomer.setAddressId(customer.getAddress().getAddressId());
-            dtoCustomerList.add(dtoCustomer);
+        List<CustomerResponseDto> customerResponseDtoList = new ArrayList<>();
+        for (Customer customer : customerList) {
+            CustomerResponseDto customerResponseDto = new CustomerResponseDto();
+            customerResponseDto.setName(customer.getName());
+            customerResponseDto.setAddressId(customer.getAddress().getAddressId());
+            customerResponseDtoList.add(customerResponseDto);
         }
-        return dtoCustomerList;
+        return customerResponseDtoList;
     }
 
     @Override
-    public DtoCustomer findCustomerById(Integer id){
+    public CustomerResponseDto findCustomerById(Integer id){
         Optional<Customer> optional = customerRepository.findById(id);
 
         if(optional.isPresent()){
-            DtoCustomer dtoCustomer = new DtoCustomer();
-            dtoCustomer.setName(optional.get().getName());
-            dtoCustomer.setAddressId(optional.get().getAddress().getAddressId());
-            return dtoCustomer;
+            CustomerResponseDto customerResponseDto = new CustomerResponseDto();
+            customerResponseDto.setName(optional.get().getName());
+            customerResponseDto.setAddressId(optional.get().getAddress().getAddressId());
+            return customerResponseDto;
         }
         return null;
     }

@@ -1,12 +1,12 @@
 package org.example.controller;
 
-import org.example.dto.customer.DtoCustomer;
-import org.example.dto.customer.DtoCustomerIU;
+import org.example.dto.customer.CustomerRequestDto;
+import org.example.dto.customer.CustomerResponseDto;
 
 import java.util.List;
 
 public interface ICustomerController {
-    public DtoCustomer saveCustomer(DtoCustomerIU dtoCustomerIU);
-    public List<DtoCustomer> getCustomers();
-    public DtoCustomer getCustomerById(Integer id);
+    CustomerResponseDto saveCustomer(CustomerRequestDto customerRequestDto);
+    List<CustomerResponseDto> getCustomers();
+    CustomerResponseDto getCustomerById(Integer id);
 }

@@ -1,8 +1,9 @@
 package org.example.controller;
 
-import org.example.dto.DtoEmployee;
+import org.example.dto.EmployeeResponseDto;
+
 import java.util.List;
 
 public interface IEmployeController {
-    public List<DtoEmployee> getEmployee();
+    List<EmployeeResponseDto> getEmployee();
 }

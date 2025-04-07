@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import org.example.dto.home.DtoHome;
+import org.example.dto.home.HomeResponseDto;
 
 public interface IHomeController {
-    public DtoHome getHomeById(Integer id);
+    HomeResponseDto getHomeById(Integer id);
 }

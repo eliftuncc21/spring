@@ -1,13 +1,13 @@
-package org.example.dto.department;
+package org.example.dto.room;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoDepartment {
+@Data
+public class RoomResponseDto {
     private Integer id;
-    private String departmentName;
+    private String name;
 }

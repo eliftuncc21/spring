@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.dto.course.DtoCourse;
+import org.example.dto.course.CourseResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoStudent {
+public class StudentResponseDto {
     private Integer id;
     private String firstName;
     private String lastName;
-    private List<DtoCourse> courses = new ArrayList<>();
+    private List<CourseResponseDto> courses = new ArrayList<>();
 }

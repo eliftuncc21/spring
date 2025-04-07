@@ -13,7 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoStudentIU {
+public class StudentRequestDto {
     @NotEmpty(message = "firstName alanı boş bırakılamaz")
     @Min(value = 3)
     @Max(value = 10)

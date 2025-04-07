@@ -1,36 +1,36 @@
 package org.example.services.impl;
 
-import org.example.dto.address.DtoAddress;
-import org.example.dto.address.DtoAddressIU;
-import org.example.dto.customer.DtoCustomer;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.address.AddressRequestDto;
+import org.example.dto.address.AddressResponseDto;
+import org.example.dto.customer.CustomerResponseDto;
 import org.example.entities.Address;
 import org.example.repository.AddressRepository;
 import org.example.services.IAddressServices;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AddressServicesImpl implements IAddressServices {
 
-    @Autowired
-    private AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
     @Override
-    public DtoAddress saveAddress(DtoAddressIU dtoAddressIU) {
-        DtoAddress dtoAddress = new DtoAddress();
+    public AddressResponseDto saveAddress(AddressRequestDto addressRequestDto) {
+        AddressResponseDto dtoAddress = new AddressResponseDto();
         Address address = new Address();
-        BeanUtils.copyProperties(dtoAddressIU, address);
+        BeanUtils.copyProperties(addressRequestDto, address);
         Address dbAddress = addressRepository.save(address);
         BeanUtils.copyProperties(dbAddress, dtoAddress);
         return dtoAddress;
     }
 
     @Override
-    public DtoAddress findAddressById(Integer addressId) {
-        DtoAddress dtoAddress = new DtoAddress();
+    public AddressResponseDto findAddressById(Integer addressId) {
+        AddressResponseDto dtoAddress = new AddressResponseDto();
         Optional<Address> optional = addressRepository.findById(addressId);
         if(optional.isEmpty()){
             return null;
@@ -38,11 +38,11 @@ public class AddressServicesImpl implements IAddressServices {
         Address address = optional.get();
         BeanUtils.copyProperties(address, dtoAddress);
 
-        DtoCustomer dtoCustomer = new DtoCustomer();
-        dtoCustomer.setName(address.getCustomer().getName());
-        dtoCustomer.setAddressId(addressId);
+        CustomerResponseDto customerResponseDto = new CustomerResponseDto();
+        customerResponseDto.setName(address.getCustomer().getName());
+        customerResponseDto.setAddressId(addressId);
 
-        dtoAddress.setCustomer(dtoCustomer);
+        dtoAddress.setCustomer(customerResponseDto);
         return dtoAddress;
     }
 }

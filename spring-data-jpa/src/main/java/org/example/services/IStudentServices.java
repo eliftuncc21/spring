@@ -1,14 +1,14 @@
 package org.example.services;
 
-import org.example.dto.student.DtoStudent;
-import org.example.dto.student.DtoStudentIU;
+import org.example.dto.student.StudentResponseDto;
+import org.example.dto.student.StudentRequestDto;
 
 import java.util.List;
 
 public interface IStudentServices {
-    public DtoStudent saveStudent(DtoStudentIU dtoStudentIU);
-    public List<DtoStudent> getStudent();
-    public DtoStudent getStudentById(Integer id);
-    public void deleteStudent(Integer id);
-    public DtoStudent updateStudent(Integer id, DtoStudentIU dtoStudentIU);
+    StudentResponseDto saveStudent(StudentRequestDto studentRequestDto);
+    List<StudentResponseDto> getStudent();
+    StudentResponseDto getStudentById(Integer id);
+    void deleteStudent(Integer id);
+    StudentResponseDto updateStudent(Integer id, StudentRequestDto studentRequestDto);
 }

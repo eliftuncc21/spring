@@ -1,12 +1,13 @@
 package org.example.controller;
 
-import org.example.entities.Student;
+import org.example.dto.student.StudentRequestDto;
+import org.example.dto.student.StudentResponseDto;
 import java.util.List;
 
 public interface IStudentController {
-    public Student saveStudent(Student student);
-    public List<Student> getStudent();
-    public Student getStudentById(Integer id);
-    public void deleteStudent(Integer id);
-    public Student updatedStudent(Integer id, Student student);
+    StudentResponseDto saveStudent(StudentRequestDto studentRequestDto);
+    List<StudentResponseDto> getStudent();
+    StudentResponseDto getStudentById(Integer id);
+    void deleteStudent(Integer id);
+    StudentResponseDto updatedStudent(Integer id, StudentRequestDto studentRequestDto);
 }

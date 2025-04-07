@@ -1,36 +1,37 @@
 package org.example.controller.impl;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.example.controller.IStudentController;
-import org.example.entities.Student;
+import org.example.dto.student.StudentRequestDto;
+import org.example.dto.student.StudentResponseDto;
 import org.example.services.IStudentServices;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/rest/api/student")
+@RequiredArgsConstructor
 public class StudentControllerImpl implements IStudentController {
 
-     @Autowired
-     private IStudentServices studentServices;
+    private final IStudentServices studentServices;
 
     @PostMapping(path = "/save")
     @Override
-    public Student saveStudent(@RequestBody Student student) {
-        return studentServices.saveStudent(student);
+    public StudentResponseDto saveStudent(@RequestBody @Valid StudentRequestDto studentRequestDto) {
+        return studentServices.saveStudent(studentRequestDto);
     }
 
     @GetMapping(path = "/list")
     @Override
-    public List<Student> getStudent() {
+    public List<StudentResponseDto> getStudent() {
         return studentServices.getStudent();
     }
 
     @GetMapping(path = "/list/{id}")
     @Override
-    public Student getStudentById(@PathVariable(name = "id", required = true) Integer id) {
+    public StudentResponseDto getStudentById(@PathVariable(name = "id", required = true) Integer id) {
         return studentServices.getStudentById(id);
     }
 
@@ -42,7 +43,7 @@ public class StudentControllerImpl implements IStudentController {
 
     @PutMapping(path = "update/{id}")
     @Override
-    public Student updatedStudent(@PathVariable(name = "id", required = true) Integer id,@RequestBody Student student) {
-        return studentServices.updateStudent(id, student);
+    public StudentResponseDto updatedStudent(@PathVariable(name = "id", required = true) Integer id, @RequestBody StudentRequestDto studentRequestDto) {
+        return studentServices.updateStudent(id, studentRequestDto);
     }
 }

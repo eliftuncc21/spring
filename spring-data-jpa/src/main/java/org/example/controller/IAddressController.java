@@ -1,9 +1,9 @@
 package org.example.controller;
 
-import org.example.dto.address.DtoAddress;
-import org.example.dto.address.DtoAddressIU;
+import org.example.dto.address.AddressRequestDto;
+import org.example.dto.address.AddressResponseDto;
 
 public interface IAddressController {
-    public DtoAddress saveAddress(DtoAddressIU dtoAddressIU);
-    public DtoAddress findAddressById(Integer id);
+    AddressResponseDto saveAddress(AddressRequestDto addressRequestDto);
+    AddressResponseDto findAddressById(Integer id);
 }

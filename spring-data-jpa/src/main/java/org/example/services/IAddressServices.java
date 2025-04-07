@@ -1,9 +1,9 @@
 package org.example.services;
 
-import org.example.dto.address.DtoAddress;
-import org.example.dto.address.DtoAddressIU;
+import org.example.dto.address.AddressRequestDto;
+import org.example.dto.address.AddressResponseDto;
 
 public interface IAddressServices {
-    public DtoAddress saveAddress(DtoAddressIU dtoAddressIU);
-    public DtoAddress findAddressById(Integer addressId);
+    AddressResponseDto saveAddress(AddressRequestDto addressRequestDto);
+    AddressResponseDto findAddressById(Integer addressId);
 }
